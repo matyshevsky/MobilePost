@@ -68,8 +68,8 @@
                 </div>
                 <nav class="menu">
                     <ul class="nav metismenu" id="sidebar-menu">
-                        <li class="active">
-                            <a href="addParcel.html"> <i class="fa fa-home fa-fw"></i> Strona główna </a>
+                        <li>
+                            <a href="/"> <i class="fa fa-home fa-fw"></i> Strona główna </a>
                         </li>
 
                         <li>
@@ -103,7 +103,7 @@
                             </ul>
                         </li>
 
-                        <li class="open">
+                        <li class="active open">
                             <a href=""> <i class="fa fa-plus-square-o fa-fw"></i> Zarejestruj <i class="fa arrow"></i>
                             </a>
                             <ul class="collapse in">
@@ -147,14 +147,35 @@
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <article class="content dashboard-page">
             <section class="section">
-
+                <div class="row sameheight-container">
+                    <div class="col-md-6">
+                        <div class="card card-block sameheight-item">
+                            <div class="title-block">
+                                <h5>Dodaj nową przesyłkę</h5>
+                            </div>
+                            <form>
+                                <div class="form-group">
+                                    <label class="control-label">Numer przesyłki</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj numer przesyłki..."/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Masa</label>
+                                    <input type="number" class="form-control boxed" placeholder="Podaj wagę przesyłki (kg)..."/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Imię nadawcy</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj imię nadawcy..."/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Nazwisko nadawcy</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj nazwisko nadawcy..."/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </section>
-            <section class="section">
 
-            </section>
-            <section class="section map-tasks">
-
-            </section>
         </article>
 
         <div class="modal fade" id="modal-media">
