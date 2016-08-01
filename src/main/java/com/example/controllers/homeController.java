@@ -19,20 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class homeController {
 
-
-
-
-
-
-
-
-
-
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
-
-
-
         return "accessDenied";
     }
 
@@ -45,8 +33,5 @@ public class homeController {
     public String index() {
         return "index";
     }
-
-
-
 
 }
