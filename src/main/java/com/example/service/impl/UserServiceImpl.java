@@ -10,23 +10,31 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 /**
  * Created by Karol on 27.07.2016.
  */
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
 
-
+    @Override
+    @Transactional
     public mUser getUserByUsername(String username) {
 
         return userDao.getUserByUsername(username);
     }
 
+    @Override
+    @Transactional
+    public Collection<mUser> getAllUser() {
+        return userDao.findAll();
+    }
 
+    @Override
     public mUser getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
