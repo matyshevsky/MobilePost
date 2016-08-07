@@ -33,24 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login")
-                .anonymous()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .and()
-                .csrf()
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/Access_Denied")
-                .and()
-                .antMatcher("/registry/index").authorizeRequests();
+        http.authorizeRequests().antMatchers("/").authenticated().antMatchers("/login").permitAll().and().formLogin().loginPage("/login")
+                .permitAll().usernameParameter("username").passwordParameter("password").and().logout()
+                .logoutUrl("/logout").and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
 
     }
 
