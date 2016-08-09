@@ -1,18 +1,16 @@
-<!doctype html>
-
 <html class="no-js" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title> MobilePost - Strona główna </title>
+    <title> MobilePost - Użytkownicy </title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
     <!-- Place favicon.ico in the root directory -->
-    <link rel="stylesheet" th:href="@{css/vendor.css}"/>
+    <link rel="stylesheet" th:href="@{../css/vendor.css}" media="all"/>
     <!-- Theme initialization -->
-    <link rel="stylesheet" id="theme-style" th:href="@{css/app.css}"/>
+    <link rel="stylesheet" th:href="@{../css/app.css}" media="all"/>
 
 </head>
 
@@ -27,7 +25,8 @@
             </div>
             <div class="header-block header-block-search hidden-sm-down">
                 <form role="search">
-                    <div class="input-container"><i class="fa fa-search"></i> <input type="search" placeholder="Szukaj"/>
+                    <div class="input-container"><i class="fa fa-search"></i> <input type="search"
+                                                                                     placeholder="Szukaj"/>
                         <div class="underline"></div>
                     </div>
                 </form>
@@ -68,7 +67,7 @@
                 </div>
                 <nav class="menu">
                     <ul class="nav metismenu" id="sidebar-menu">
-                        <li class="active">
+                        <li>
                             <a href="index.html"> <i class="fa fa-home fa-fw"></i> Strona główna </a>
                         </li>
 
@@ -122,9 +121,9 @@
                             </ul>
                         </li>
 
-                        <li>
+                        <li class="active open">
                             <a href=""> <i class="fa fa-gears fa-fw"></i> Administracja <i class="fa arrow"></i> </a>
-                            <ul>
+                            <ul class="collapse in">
                                 <li><a href="#">
                                     <i class="fa fa-list fa-fw"></i>
                                     Cenniki
@@ -137,7 +136,7 @@
                                     <i class="fa fa-pencil-square-o fa-fw"></i>
                                     Typy przesyłek
                                 </a></li>
-                                <li><a href="/users/list">
+                                <li class="active"><a href="/users">
                                     <i class="fa fa-user fa-fw"></i>
                                     Użytkownicy
                                 </a></li>
@@ -150,8 +149,43 @@
         </aside>
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <article class="content dashboard-page">
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="title">
+                                Użytkownicy
+                                <a href="addUser" class="btn btn-primary btn-sm rounded-s disabled">Dodaj</a>
+                            </h3>
+                            <p class="title-description"> Sekcja administracyjna zarządzania użytkownikami </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <section class="section">
-
+                <div class="row sameheight-container">
+                    <form>
+                        <div class="col-md-4">
+                            <div class="card card-block sameheight-item">
+                                <div class="title-block">
+                                    <h5>Dane użytkownika</h5>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Adres email</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj adres email..." />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Hasło</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj hasło..."/>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-pill-left btn-primary">Dodaj</button>
+                        <button class="btn btn-pill-right btn-secondary" onclick="goBack()">Wróć</button>
+                    </form>
+                </div>
             </section>
             <section class="section">
 
@@ -221,8 +255,13 @@
         <div class="color-secondary"></div>
     </div>
 </div>
-<script src="js/vendor.js"></script>
-<script src="js/app.js"></script>
+<script src="../js/vendor.js"></script>
+<script src="../js/app.js"></script>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 </body>
 
 </html>
