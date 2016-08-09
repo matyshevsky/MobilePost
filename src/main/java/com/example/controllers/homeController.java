@@ -34,6 +34,12 @@ public class homeController {
         return "login";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        return "login";
+    }
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "index";
