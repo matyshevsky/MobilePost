@@ -177,13 +177,14 @@
                                         <thead class="flip-header">
                                         <tr>
                                             <th>Adres email</th>
+                                            <th>Opcje</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="item : ${userList}">
                                             <td th:text="${item.username}"></td>
+                                            <td><a th:href="@{/user/edit(id=${item.id})}" class="btn btn-secondary">Edytuj</a></td>
                                         </tr>
-
                                         </tbody>
                                     </table>
                                 </div>

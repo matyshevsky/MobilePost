@@ -1,9 +1,6 @@
 package com.example.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,7 +10,8 @@ import java.util.Date;
 public abstract class mBaseObject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE , generator="idGen")
+    @Column(name="id")
     protected Long id;
 
     public Date CreateAt;

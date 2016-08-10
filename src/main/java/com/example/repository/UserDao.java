@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserDao extends JpaRepository<mUser, Long> {
 
     mUser getUserByUsername(String username);
-
+    mUser getUserById(Long id);
 
 }

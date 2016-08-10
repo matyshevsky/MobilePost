@@ -9,6 +9,7 @@ import java.util.Set;
  * Created by Karol on 24.07.2016.
  */
 @Entity(name = "roles")
+@SequenceGenerator(initialValue = 1, name = "idGen", sequenceName = "roleId")
 @Table(name = "roles")
 public class mRole extends mBaseObject {
 

@@ -164,7 +164,7 @@
             </div>
             <section class="section">
                 <div class="row sameheight-container">
-                    <form>
+                    <form action="#" th:action="addUser" th:object="${muser}" method="post">
                         <div class="col-md-4">
                             <div class="card card-block sameheight-item">
                                 <div class="title-block">
@@ -173,12 +173,12 @@
                                 <div class="form-group">
                                     <label class="control-label">Adres email</label>
                                     <input type="text" class="form-control boxed"
-                                           placeholder="Podaj adres email..." />
+                                           placeholder="Podaj adres email..." th:field="*{username}"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Hasło</label>
                                     <input type="text" class="form-control boxed"
-                                           placeholder="Podaj hasło..."/>
+                                           placeholder="Podaj hasło..." th:field="*{password}"/>
                                 </div>
                             </div>
                         </div>

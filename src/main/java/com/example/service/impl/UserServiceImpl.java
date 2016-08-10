@@ -28,6 +28,15 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserByUsername(username);
     }
 
+    public mUser addUser(mUser user){
+        return userDao.save(user);
+    }
+
+    @Override
+    public mUser getUserById(Long id) {
+        return userDao.getUserById(id);
+    }
+
     @Override
     @Transactional
     public Collection<mUser> getAllUser() {
