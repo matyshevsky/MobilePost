@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title> MobilePost - Dodaj użytkownika </title>
+    <title> MobilePost - Dodaj urząd </title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -128,7 +128,7 @@
                                     <i class="fa fa-list fa-fw"></i>
                                     Cenniki
                                 </a></li>
-                                <li><a href="/posts/list">
+                                <li class="active"><a href="/posts/list">
                                     <i class="fa fa-legal fa-fw"></i>
                                     Urzędy
                                 </a></li>
@@ -136,7 +136,7 @@
                                     <i class="fa fa-pencil-square-o fa-fw"></i>
                                     Typy przesyłek
                                 </a></li>
-                                <li class="active"><a href="/users/list">
+                                <li><a href="/users/list">
                                     <i class="fa fa-user fa-fw"></i>
                                     Użytkownicy
                                 </a></li>
@@ -154,31 +154,36 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h3 class="title">
-                                Użytkownicy
-                                <a href="addUser" class="btn btn-primary btn-sm rounded-s disabled">Dodaj</a>
+                                Urzędy
+                                <a href="addPost" class="btn btn-primary btn-sm rounded-s disabled">Dodaj</a>
                             </h3>
-                            <p class="title-description"> Sekcja administracyjna zarządzania użytkownikami </p>
+                            <p class="title-description"> Sekcja administracyjna zarządzania urzędami pocztowymi </p>
                         </div>
                     </div>
                 </div>
             </div>
             <section class="section">
                 <div class="row sameheight-container">
-                    <form action="#" th:action="addUser" th:object="${muser}" method="post">
+                    <form action="#" th:action="addPost" th:object="${mpost}" method="post">
                         <div class="col-md-4">
                             <div class="card card-block sameheight-item">
                                 <div class="title-block">
-                                    <h5>Dane użytkownika</h5>
+                                    <h5>Dane urzędu pocztowego</h5>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Adres email</label>
+                                    <label class="control-label">Kod</label>
                                     <input type="text" class="form-control boxed"
-                                           placeholder="Podaj adres email..." th:field="*{username}"/>
+                                           placeholder="Podaj kod urzędu..." th:field="*{code}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Hasło</label>
+                                    <label class="control-label">Nazwa</label>
                                     <input type="text" class="form-control boxed"
-                                           placeholder="Podaj hasło..." th:field="*{password}"/>
+                                           placeholder="Podaj nazwę urzędu..." th:field="*{name}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Kod pocztowy</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj kod pocztowy urzędu..." th:field="*{zipcode}"/>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-pill-left btn-primary">Dodaj</button>

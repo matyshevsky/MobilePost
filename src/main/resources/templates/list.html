@@ -68,7 +68,7 @@
                 <nav class="menu">
                     <ul class="nav metismenu" id="sidebar-menu">
                         <li>
-                            <a href="index.html"> <i class="fa fa-home fa-fw"></i> Strona główna </a>
+                            <a href="/"> <i class="fa fa-home fa-fw"></i> Strona główna </a>
                         </li>
 
                         <li>
@@ -128,15 +128,15 @@
                                     <i class="fa fa-list fa-fw"></i>
                                     Cenniki
                                 </a></li>
-                                <li><a href="#">
+                                <li><a href="/posts/list">
                                     <i class="fa fa-legal fa-fw"></i>
                                     Urzędy
                                 </a></li>
-                                <li><a href="#">
+                                <li><a href="/types/list">
                                     <i class="fa fa-pencil-square-o fa-fw"></i>
                                     Typy przesyłek
                                 </a></li>
-                                <li class="active"><a href="/users">
+                                <li class="active"><a href="/users/list">
                                     <i class="fa fa-user fa-fw"></i>
                                     Użytkownicy
                                 </a></li>
@@ -183,7 +183,7 @@
                                         <tbody>
                                         <tr th:each="item : ${userList}">
                                             <td th:text="${item.username}"></td>
-                                            <td><a th:href="@{/user/edit(id=${item.id})}" class="btn btn-secondary">Edytuj</a></td>
+                                            <td><a th:href="@{/user/edit(id=${item.id})}" class="btn btn-primary-outline">Edytuj</a></td>
                                         </tr>
                                         </tbody>
                                     </table>
