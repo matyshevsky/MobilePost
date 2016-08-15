@@ -15,6 +15,7 @@ import java.util.Set;
  * Created by Karol on 24.07.2016.
  */
 @Entity(name = "users")
+@SequenceGenerator(initialValue = 1, name = "idGen", sequenceName = "userId")
 @Table(name = "users")
 public class mUser extends mBaseObject implements UserDetails {
 

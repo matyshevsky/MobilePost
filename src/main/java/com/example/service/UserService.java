@@ -11,4 +11,6 @@ public interface UserService {
     mUser getUserByUsername(String username);
     Collection<mUser> getAllUser();
     mUser getCurrentUser();
+    mUser addUser(mUser user);
+    mUser getUserById(Long id);
 }

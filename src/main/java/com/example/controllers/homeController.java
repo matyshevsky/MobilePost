@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class homeController {
 
-    @Autowired
-    UserService userService;
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
@@ -34,16 +32,16 @@ public class homeController {
         return "login";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        return "login";
+    }
+
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "index";
     }
 
-    @RequestMapping(value = "/users",method = RequestMethod.GET)
-    public String getAllUser(Model model){
-        model.addAttribute("userList",userService.getAllUser());
-        return "all-user";
-
-    }
 
 }

@@ -1,11 +1,9 @@
-<!doctype html>
-
 <html class="no-js" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title> MobilePost - Strona główna </title>
+    <title> MobilePost - Dodaj typ przesyłki </title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -58,7 +56,7 @@
                 </div>
             </div>
             <div class="header-block header-block-nav">
-                <a href=""><i class="fa fa-power-off fa-2x"></i> Wyloguj się</a>
+                <a href="logout"><i class="fa fa-power-off fa-2x"></i> Wyloguj się</a>
             </div>
         </header>
         <aside class="sidebar">
@@ -104,11 +102,11 @@
                             </ul>
                         </li>
 
-                        <li class="active open">
+                        <li>
                             <a href=""> <i class="fa fa-plus-square-o fa-fw"></i> Zarejestruj <i class="fa arrow"></i>
                             </a>
-                            <ul class="collapse in">
-                                <li class="active"><a href="/registry/index">
+                            <ul>
+                                <li><a href="/registry/index">
                                     <i class="fa fa-envelope-o fa-fw"></i>
                                     Dodaj nową przesyłkę
                                 </a></li>
@@ -123,9 +121,9 @@
                             </ul>
                         </li>
 
-                        <li>
+                        <li class="active open">
                             <a href=""> <i class="fa fa-gears fa-fw"></i> Administracja <i class="fa arrow"></i> </a>
-                            <ul>
+                            <ul class="collapse in">
                                 <li><a href="#">
                                     <i class="fa fa-list fa-fw"></i>
                                     Cenniki
@@ -134,7 +132,7 @@
                                     <i class="fa fa-legal fa-fw"></i>
                                     Urzędy
                                 </a></li>
-                                <li><a href="/types/list">
+                                <li class="active"><a href="/types/list">
                                     <i class="fa fa-pencil-square-o fa-fw"></i>
                                     Typy przesyłek
                                 </a></li>
@@ -151,130 +149,51 @@
         </aside>
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <article class="content dashboard-page">
-            <div class="title-block">
-                <h3 class="title">
-                    Dodaj paczkę
-                </h3>
-                <p class="title-description"> Aby dodać paczkę proszę o uzupełnienie wszystkich pól</p>
+            <div class="title-search-block">
+                <div class="title-block">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="title">
+                                Typy przesyłek
+                                <a href="addTypes" class="btn btn-primary btn-sm rounded-s disabled">Dodaj</a>
+                            </h3>
+                            <p class="title-description"> Sekcja administracyjna zarządzania typami przesyłek </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="subtitle-block">
-                <h3 class="subtitle">
-                    Formularz dodawania nowej paczki
-                </h3> </div>
             <section class="section">
                 <div class="row sameheight-container">
-                    <form>
+                    <form action="#" th:action="addTypes" th:object="${mtype}" method="post">
                         <div class="col-md-4">
                             <div class="card card-block sameheight-item">
                                 <div class="title-block">
-                                    <h5>Dane paczki</h5>
+                                    <h5>Dane użytkownika</h5>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Numer przesyłki</label>
+                                    <label class="control-label">Kod</label>
                                     <input type="text" class="form-control boxed"
-                                           placeholder="Podaj numer przesyłki..."/>
+                                           placeholder="Podaj kod przesyłki..." th:field="*{code}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Typ paczki</label>
-                                    <select class="form-control form-control-sm">
-                                        <option>Option one</option>
-                                        <option>Option two</option>
-                                        <option>Option three</option>
-                                        <option>Option four</option>
-                                    </select></div>
-                                <div class="form-group">
-                                    <label class="control-label">Masa</label>
-                                    <input type="number" class="form-control boxed"
-                                           placeholder="Podaj wagę przesyłki (kg)..."/>
+                                    <label class="control-label">Nazwa</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj nazwę przesyłki..." th:field="*{name}"/>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-pill-left btn-primary">Dodaj</button>
+                            <button class="btn btn-pill-right btn-secondary" onclick="goBack()">Wróć</button>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-block sameheight-item">
-                                <div class="title-block">
-                                    <h5>Dane adresata</h5>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Imię nadawcy</label>
-                                    <input type="text" class="form-control boxed" placeholder="Podaj imię nadawcy..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Nazwisko nadawcy</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj nazwisko nadawcy..."/>
-                                </div>
-                                <label class="control-label"><i>Adres i dane kontaktowe nadawcy</i></label>
-                                <div class="form-group">
-                                    <label class="control-label">Kod pocztowy</label>
-                                    <input type="text" class="form-control boxed" placeholder="Podaj kod pocztowy..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Miejscowość</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj nazwę miejscowości..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Ulica</label>
-                                    <input type="text" class="form-control boxed" placeholder="Podaj nazwę ulicy..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Numer mieszkania</label>
-                                    <input type="number" class="form-control boxed"
-                                           placeholder="Podaj numer mieszkania..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Numer telefonu</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj numer telefonu..."/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-block sameheight-item">
-                                <div class="title-block">
-                                    <h5>Dane odbiorcy</h5>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Imię odbiorcy</label>
-                                    <input type="text" class="form-control boxed" placeholder="Podaj imię odbiorcy..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Nazwisko odbiorcy</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj nazwisko odbiorcy..."/>
-                                </div>
-                                <label class="control-label"><i>Adres i dane kontaktowe odbiorcy</i></label>
-                                <div class="form-group">
-                                    <label class="control-label">Kod pocztowy</label>
-                                    <input type="text" class="form-control boxed" placeholder="Podaj kod pocztowy..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Miejscowość</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj nazwę miejscowości..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Ulica</label>
-                                    <input type="text" class="form-control boxed" placeholder="Podaj nazwę ulicy..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Numer mieszkania</label>
-                                    <input type="number" class="form-control boxed"
-                                           placeholder="Podaj numer mieszkania..."/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Numer telefonu</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj numer telefonu..."/>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-pill-left btn-primary">Dodaj</button>
-                        <button class="btn btn-pill-right btn-secondary" onclick="goBack()">Wróć</button>
+
                     </form>
                 </div>
             </section>
+            <section class="section">
 
+            </section>
+            <section class="section map-tasks">
+
+            </section>
         </article>
 
         <div class="modal fade" id="modal-media">
