@@ -1,13 +1,15 @@
 package com.example.controllers;
 
-import com.example.model.mPost;
-import com.example.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.model.mPost;
+import com.example.service.PostService;
 
 /**
  * Created by Karol on 11.08.2016.
@@ -38,6 +40,18 @@ public class postController {
 
         return "redirect:/posts/list";
     }
+
+	@RequestMapping("/edit")
+	public String edit(@RequestParam(value = "id") Long id, Model model) {
+		model.addAttribute("mpost", postService.getPostById(id));
+		return "editPost";
+	}
+
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	public String update(@ModelAttribute("mpost") mPost post) {
+		postService.update(post);
+		return "redirect:list";
+	}
 
 
 }

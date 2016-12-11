@@ -1,7 +1,8 @@
 package com.example.service;
 
-import com.example.model.mPost;
 import java.util.Collection;
+
+import com.example.model.mPost;
 
 /**
  * Created by Karol on 11.08.2016.
@@ -12,5 +13,9 @@ public interface PostService {
     mPost getPostByCode(String code);
     mPost getPostByZipcode(String zipcode);
     mPost addPost(mPost type);
+
+	mPost getPostById(Long id);
+
+	void update(mPost post);
 
 }
