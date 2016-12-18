@@ -215,7 +215,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-                                <a href="" class="btn btn-danger removeBtn">Usun</a>
+                                <a href="" class="btn btn-danger" id="removeBtn">Usun</a>
                             </div>
                         </div>
                     </div>
@@ -294,8 +294,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".triggerRemove").click(function (e) {
+            var link = $(this).attr("href");
+            console.log(link);
             e.preventDefault();
-            $("#modalRemove.removeBtn").attr("href", $(this).attr("href"));
+            $("#removeBtn").attr("href",link);
             $("#modalRemove").modal();
         });
     });

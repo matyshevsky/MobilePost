@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
 	}
 
     @Override
-    public void delete(mPost post) {
-        postDao.delete(post.getId());
+    public void delete(Long id) {
+        postDao.delete(id);
     }
 }
