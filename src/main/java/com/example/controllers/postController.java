@@ -53,5 +53,18 @@ public class postController {
 		return "redirect:list";
 	}
 
+    @RequestMapping("/delete")
+    public String remove(@RequestParam(value = "id") Long id, Model model) {
+        model.addAttribute("mpost", postService.getPostById(id));
+        return "removePost";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String remove(@ModelAttribute("mpost") mPost post) {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA: " + post.getId() + " " + post.getName());
+        postService.delete(post);
+        return "redirect:list";
+    }
+
 
 }
