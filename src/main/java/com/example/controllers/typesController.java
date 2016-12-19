@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Karol on 10.08.2016.
@@ -34,10 +35,26 @@ public class typesController {
 
     @RequestMapping(value = "/addTypes", method=RequestMethod.POST)
     public String addUser(@ModelAttribute(value="mtype") mTypes mtype){
-
         typesService.addType(mtype);
-
         return "redirect:/types/list";
+    }
+
+    @RequestMapping("/edit")
+    public String edit(@RequestParam(value = "id") Long id, Model model) {
+        model.addAttribute("mtype", typesService.getPostById(id));
+        return "editTypes";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String update(@ModelAttribute("mtype") mTypes type) {
+        typesService.update(type);
+        return "redirect:list";
+    }
+
+    @RequestMapping("/delete")
+    public String remove(@RequestParam(value = "id") Long id) {
+        typesService.delete(id);
+        return "redirect:list";
     }
 
 }

@@ -32,4 +32,19 @@ public class TypesServiceImpl implements TypesService {
     public mTypes addType(mTypes type) {
         return typesDao.save(type);
     }
+
+    @Override
+    public mTypes getPostById(Long id) {
+        return typesDao.getTypesById(id);
+    }
+
+    @Override
+    public void update(mTypes type) {
+        typesDao.save(type);
+    }
+
+    @Override
+    public void delete(Long id) {
+        typesDao.delete(id);
+    }
 }

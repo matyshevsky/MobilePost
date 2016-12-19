@@ -190,7 +190,6 @@
                                             <td th:text="${item.name}"></td>
                                             <td th:text="${item.zipcode}"></td>
                                             <td><a th:href="@{/posts/edit(id=${item.id})}" class="btn btn-primary-outline">Edytuj</a>
-                                                <a th:href="@{/posts/delete(id=${item.id})}" class="btn btn-warning-outline">Usuń</a>
                                                 <a th:href="@{/posts/delete(id=${item.id})}" class="btn btn-warning-outline triggerRemove">Usuń</a>
                                             </td>
                                         </tr>
@@ -211,7 +210,7 @@
                                 <h4 class="modal-title" id="exampleModalLabel">Usuń</h4>
                             </div>
                             <div class="modal-body">
-                                Powaznie usun?
+                                Czy naprawdę chcesz usunąć ten element?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>

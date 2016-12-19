@@ -11,4 +11,7 @@ public interface TypesService {
     Collection<mTypes> getAllTypes();
     mTypes getTypesByCode(String code);
     mTypes addType(mTypes type);
+    mTypes getPostById(Long id);
+    void update(mTypes type);
+    void delete(Long id);
 }
