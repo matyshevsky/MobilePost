@@ -25,6 +25,17 @@ public class mProduct extends mBaseObject {
     @NotNull
     private Long type;
 
+    @NotNull
+    private int dayToDelivery;
+
+    public int getDayToDelivery() {
+        return dayToDelivery;
+    }
+
+    public void setDayToDelivery(int dayToDelivery) {
+        this.dayToDelivery = dayToDelivery;
+    }
+
     public String getName() {
         return name;
     }

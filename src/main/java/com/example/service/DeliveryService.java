@@ -18,5 +18,6 @@ public interface DeliveryService {
     void update(mDelivery delivery);
     void delete(Long id);
     mDelivery makeDeliver(mDelivery delivery);
+    void advise(Long id);
 
 }

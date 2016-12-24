@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.model.mDelivery;
+import com.example.model.mTypes;
 import com.example.service.DeliveryService;
 import com.example.service.ProductService;
 import com.example.service.TypesService;
@@ -35,8 +36,15 @@ public class deliveryController {
     public String addDeliver(Model model){
         mDelivery mDelivery = new mDelivery();
         model.addAttribute("delivery", mDelivery);
-        Long delvierType = typesService.getTypesByCode("Paczka").getId();
-        model.addAttribute("products", productService.getProductByType(delvierType));
+        mTypes types = typesService.getTypesByCode("Paczka");
+        if(types != null){
+            Long delvierType = types.getId();
+            model.addAttribute("products", productService.getProductByType(delvierType));
+        }
+        else{
+            model.addAttribute("products", productService.getAllProducts());
+        }
+
         return "addDeliver";
     }
 
@@ -53,6 +61,10 @@ public class deliveryController {
         return "redirect:/delivery/list";
     }
 
-
+    @RequestMapping(value = "/advise", method = RequestMethod.GET)
+    public String advise(@ModelAttribute(value="id") Long id){
+        deliveryService.advise(id);
+        return "redirect:/delivery/list";
+    }
 
 }

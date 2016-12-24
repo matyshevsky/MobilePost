@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.model.mDelivery;
+import com.example.model.mProduct;
 import com.example.repository.DeliveryDao;
 import com.example.repository.PostDao;
 import com.example.repository.ProductDao;
@@ -10,7 +11,11 @@ import com.example.service.TypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Karol on 24.12.2016.
@@ -65,8 +70,28 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public mDelivery makeDeliver(mDelivery delivery) {
-        double price = productDao.getProductById(delivery.getType()).getPrice();
+        mProduct prod = productDao.getProductById(delivery.getType());
+
+        double price = prod.getPrice();
+        int days = prod.getDayToDelivery();
         delivery.setPrice(price);
+
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, days);
+        delivery.setEstimatedDate(c.getTime());
+
+        delivery.setAdvicePackage(false);
+        delivery.setDelivered(false);
+
         return delivery;
+    }
+
+    @Override
+    public void advise(Long id) {
+        mDelivery delivery = deliveryDao.getDeliveryById(id);
+        delivery.setAdvicePackage(true);
+        deliveryDao.save(delivery);
     }
 }

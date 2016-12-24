@@ -183,20 +183,21 @@
                                             <th>Cena</th>
                                             <th>Urząd nadania</th>
                                             <th>Urząd docelowy</th>
+                                            <th>Szacowany czas doręczenia</th>
                                             <th>Opcje</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="item : ${deliverList}">
-                                            <td th:text="${item.code}"></td>
+                                            <td><a th:href="@{/posts/edit(id=${item.id})}" th:text="${item.code}"></a></td>
                                             <td th:text="${item.type}"></td>
                                             <td th:text="${item.price}"></td>
                                             <td th:text="${item.fromOffice}"></td>
                                             <td th:text="${item.recipientZipCode}"></td>
-                                            <td><a th:href="@{/posts/edit(id=${item.id})}" class="btn btn-primary-outline">Awizo</a>
-                                                <a th:href="@{/posts/edit(id=${item.id})}" class="btn btn-primary-outline">Doręczono</a>
-                                                <a th:href="@{/posts/edit(id=${item.id})}" class="btn btn-primary-outline">Szczegóły</a>
-                                                <a th:href="@{/posts/delete(id=${item.id})}" class="btn btn-warning-outline triggerRemove">Usuń</a>
+                                            <td th:text="${#calendars.format(item.estimatedDate,'yyyy-MM-dd')}"></td>
+
+                                            <td><a th:href="@{/delivery/advise(id=${item.id})}" class="btn btn-warning triggerRemove" >Awizo</a>
+                                                <a th:href="@{/delivery/delivered(id=${item.id})}" class="btn btn-success">Doręczono</a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -213,14 +214,14 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="exampleModalLabel">Usuń</h4>
+                                <h4 class="modal-title" id="exampleModalLabel">Awizo</h4>
                             </div>
                             <div class="modal-body">
-                                Czy naprawdę chcesz usunąć ten element?
+                                Czy na pewno chcesz awizować przesyłkę ?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-                                <a href="" class="btn btn-danger" id="removeBtn">Usun</a>
+                                <a href="" class="btn btn-danger" id="removeBtn">Tak</a>
                             </div>
                         </div>
                     </div>

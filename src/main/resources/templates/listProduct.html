@@ -181,6 +181,7 @@
                                             <th>Nazwa</th>
                                             <th>Cena</th>
                                             <th>Maksymalna waga</th>
+                                            <th>Dni na doręczenie</th>
                                             <th>Typ</th>
                                             <th>Opcje</th>
                                         </tr>
@@ -190,6 +191,7 @@
                                             <td th:text="${item.name}"></td>
                                             <td th:text="${item.price} + ' PLN'"></td>
                                             <td th:text="${item.weight} + ' kg'"></td>
+                                            <td th:text="${item.dayToDelivery}"></td>
                                             <td th:text="${item.type}"></td>
                                             <td><a th:href="@{/products/edit(id=${item.id})}" class="btn btn-primary-outline">Edytuj</a>
                                                 <a th:href="@{/products/delete(id=${item.id})}" class="btn btn-warning-outline triggerRemove">Usuń</a>

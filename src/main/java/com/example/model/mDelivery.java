@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by Karol on 24.12.2016.
@@ -21,7 +22,10 @@ public class mDelivery extends mBaseObject {
     private double weight;
     private double price;
     private Long fromOffice;
-
+    private boolean advicePackage;
+    private boolean isDelivered;
+    private Date estimatedDate;
+    private Date deliveredDate;
 
     private String senderName;
     private String senderSurname;
@@ -45,6 +49,38 @@ public class mDelivery extends mBaseObject {
     private String recipientApartment;
     @NotNull
     private String recipientPhone;
+
+    public boolean isAdvicePackage() {
+        return advicePackage;
+    }
+
+    public void setAdvicePackage(boolean advicePackage) {
+        this.advicePackage = advicePackage;
+    }
+
+    public boolean isDelivered() {
+        return isDelivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        isDelivered = delivered;
+    }
+
+    public Date getEstimatedDate() {
+        return estimatedDate;
+    }
+
+    public void setEstimatedDate(Date estimatedDate) {
+        this.estimatedDate = estimatedDate;
+    }
+
+    public Date getDeliveredDate() {
+        return deliveredDate;
+    }
+
+    public void setDeliveredDate(Date deliveredDate) {
+        this.deliveredDate = deliveredDate;
+    }
 
     public String getCode() {
         return code;

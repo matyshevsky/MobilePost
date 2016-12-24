@@ -187,6 +187,11 @@
                                            placeholder="Podaj wagę maksymalną towaru..." th:field="*{weight}"/>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label">Dni na doręczenie</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj szacowaną ilość dni potrzebną na doręczenie..." th:field="*{dayToDelivery}"/>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label">Typ przesyłki</label>
                                     <select th:field="*{type}">
                                         <option th:each="type : ${types}"
