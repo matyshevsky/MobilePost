@@ -1,9 +1,11 @@
+<!doctype html>
+
 <html class="no-js" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title> MobilePost - Dodaj użytkownika </title>
+    <title> MobilePost - Strona główna </title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -56,7 +58,7 @@
                 </div>
             </div>
             <div class="header-block header-block-nav">
-                <a href="logout"><i class="fa fa-power-off fa-2x"></i> Wyloguj się</a>
+                <a href=""><i class="fa fa-power-off fa-2x"></i> Wyloguj się</a>
             </div>
         </header>
         <aside class="sidebar">
@@ -102,28 +104,28 @@
                             </ul>
                         </li>
 
-                        <li>
+                        <li class="active open">
                             <a href=""> <i class="fa fa-plus-square-o fa-fw"></i> Zarejestruj <i class="fa arrow"></i>
                             </a>
-                            <ul>
-                                <li><a href="/delivery/addDeliver">
+                            <ul class="collapse in">
+                                <li class="active"><a href="/delivery/addDeliver">
                                     <i class="fa fa-envelope-o fa-fw"></i>
                                     Dodaj nową przesyłkę
                                 </a></li>
-                                <li><a href="/registry/courier">
+                                <li><a href="/deliver/courier">
                                     <i class="fa fa-truck fa-fw"></i>
                                     Dodaj przesyłkę kurierską
                                 </a></li>
-                                <li><a href="/registry/transfer">
+                                <li><a href="/deliver/transfer">
                                     <i class="fa fa-money fa-fw"></i>
                                     Dodaj nowy przekaz
                                 </a></li>
                             </ul>
                         </li>
 
-                        <li class="active open">
+                        <li>
                             <a href=""> <i class="fa fa-gears fa-fw"></i> Administracja <i class="fa arrow"></i> </a>
-                            <ul class="collapse in">
+                            <ul>
                                 <li><a href="/products/list">
                                     <i class="fa fa-list fa-fw"></i>
                                     Produkty
@@ -136,7 +138,7 @@
                                     <i class="fa fa-pencil-square-o fa-fw"></i>
                                     Typy przesyłek
                                 </a></li>
-                                <li class="active"><a href="/users/list">
+                                <li><a href="/users/list">
                                     <i class="fa fa-user fa-fw"></i>
                                     Użytkownicy
                                 </a></li>
@@ -149,51 +151,130 @@
         </aside>
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <article class="content dashboard-page">
-            <div class="title-search-block">
-                <div class="title-block">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h3 class="title">
-                                Użytkownicy
-                                <a href="addUser" class="btn btn-primary btn-sm rounded-s disabled">Dodaj</a>
-                            </h3>
-                            <p class="title-description"> Sekcja administracyjna zarządzania użytkownikami </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="title-block">
+                <h3 class="title">
+                    Dodaj paczkę
+                </h3>
+                <p class="title-description"> Aby dodać paczkę proszę o uzupełnienie wszystkich pól</p>
             </div>
+            <div class="subtitle-block">
+                <h3 class="subtitle">
+                    Formularz dodawania nowej paczki
+                </h3> </div>
             <section class="section">
                 <div class="row sameheight-container">
-                    <form action="#" th:action="addUser" th:object="${muser}" method="post">
+                    <form action="#" th:action="addDeliver" th:object="${delivery}" method="post">
                         <div class="col-md-4">
                             <div class="card card-block sameheight-item">
                                 <div class="title-block">
-                                    <h5>Dane użytkownika</h5>
+                                    <h5>Dane paczki</h5>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Adres email</label>
+                                    <label class="control-label">Numer przesyłki</label>
                                     <input type="text" class="form-control boxed"
-                                           placeholder="Podaj adres email..." th:field="*{username}"/>
+                                           placeholder="Podaj numer przesyłki..." th:field="*{code}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Hasło</label>
-                                    <input type="text" class="form-control boxed"
-                                           placeholder="Podaj hasło..." th:field="*{password}"/>
+                                    <label class="control-label">Produkt</label>
+                                    <select th:field="*{type}">
+                                        <option th:each="type : ${products}"
+                                                th:value="${type.id}"
+                                                th:text="${type.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Masa</label>
+                                    <input type="number" class="form-control boxed"
+                                           placeholder="Podaj wagę przesyłki (kg)..." th:field="*{weight}"/>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-pill-left btn-primary">Dodaj</button>
-                            <button class="btn btn-pill-right btn-secondary" onclick="goBack()">Wróć</button>
                         </div>
-
+                        <div class="col-md-4">
+                            <div class="card card-block sameheight-item">
+                                <div class="title-block">
+                                    <h5>Dane adresata</h5>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Imię nadawcy</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj imię nadawcy..." th:field="*{senderName}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Nazwisko nadawcy</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj nazwisko nadawcy..." th:field="*{senderSurname}"/>
+                                </div>
+                                <label class="control-label"><i>Adres i dane kontaktowe nadawcy</i></label>
+                                <div class="form-group">
+                                    <label class="control-label">Kod pocztowy</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj kod pocztowy..." th:field="*{senderZipCode}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Miejscowość</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj nazwę miejscowości..." th:field="*{senderCity}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Ulica</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj nazwę ulicy..." th:field="*{senderStreet}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Numer mieszkania</label>
+                                    <input type="number" class="form-control boxed"
+                                           placeholder="Podaj numer mieszkania..." th:field="*{senderApartment}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Numer telefonu</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj numer telefonu..." th:field="*{senderPhone}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card card-block sameheight-item">
+                                <div class="title-block">
+                                    <h5>Dane odbiorcy</h5>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Imię odbiorcy</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj imię odbiorcy..." th:field="*{recipientName}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Nazwisko odbiorcy</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj nazwisko odbiorcy..." th:field="*{recipientSurname}"/>
+                                </div>
+                                <label class="control-label"><i>Adres i dane kontaktowe odbiorcy</i></label>
+                                <div class="form-group">
+                                    <label class="control-label">Kod pocztowy</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj kod pocztowy..." th:field="*{recipientZipCode}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Miejscowość</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj nazwę miejscowości..." th:field="*{recipientCity}" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Ulica</label>
+                                    <input type="text" class="form-control boxed" placeholder="Podaj nazwę ulicy..." th:field="*{recipientStreet}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Numer mieszkania</label>
+                                    <input type="number" class="form-control boxed"
+                                           placeholder="Podaj numer mieszkania..." th:field="*{recipientApartment}"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Numer telefonu</label>
+                                    <input type="text" class="form-control boxed"
+                                           placeholder="Podaj numer telefonu..." th:field="*{recipientPhone}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-pill-left btn-primary">Dodaj</button>
+                        <button class="btn btn-pill-right btn-secondary" onclick="goBack()">Wróć</button>
                     </form>
                 </div>
             </section>
-            <section class="section">
 
-            </section>
-            <section class="section map-tasks">
-
-            </section>
         </article>
 
         <div class="modal fade" id="modal-media">
