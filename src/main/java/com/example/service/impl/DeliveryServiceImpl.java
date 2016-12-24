@@ -94,4 +94,14 @@ public class DeliveryServiceImpl implements DeliveryService {
         delivery.setAdvicePackage(true);
         deliveryDao.save(delivery);
     }
+
+    @Override
+    public void delivered(Long id) {
+        mDelivery delivery = deliveryDao.getDeliveryById(id);
+        delivery.setDelivered(true);
+        delivery.setAdvicePackage(false);
+        Date dt = new Date();
+        delivery.setDeliveredDate(dt);
+        deliveryDao.save(delivery);
+    }
 }

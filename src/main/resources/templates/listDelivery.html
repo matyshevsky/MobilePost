@@ -197,7 +197,7 @@
                                             <td th:text="${#calendars.format(item.estimatedDate,'yyyy-MM-dd')}"></td>
 
                                             <td><a th:href="@{/delivery/advise(id=${item.id})}" class="btn btn-warning triggerRemove" >Awizo</a>
-                                                <a th:href="@{/delivery/delivered(id=${item.id})}" class="btn btn-success">Doręczono</a>
+                                                <a th:href="@{/delivery/delivered(id=${item.id})}" class="btn btn-success triggerDelivery">Doręczono</a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -226,6 +226,25 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="modalDelivered" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="exampleModalLabel2">Dostarczono</h4>
+                            </div>
+                            <div class="modal-body">
+                                Czy na pewno chcesz oznaczyć przesyłkę jako doręczoną ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                                <a href="" class="btn btn-danger" id="deliveryBtn">Tak</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </section>
             <section class="section">
 
@@ -306,6 +325,15 @@
             $("#removeBtn").attr("href",link);
             $("#modalRemove").modal();
         });
+
+        $(".triggerDelivery").click(function (e) {
+            var link = $(this).attr("href");
+            console.log(link);
+            e.preventDefault();
+            $("#deliveryBtn").attr("href",link);
+            $("#modalDelivered").modal();
+        });
+
     });
 </script>
 </body>
