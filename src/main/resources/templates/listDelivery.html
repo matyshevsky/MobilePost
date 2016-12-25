@@ -189,7 +189,7 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="item : ${deliverList}">
-                                            <td><a th:href="@{/posts/edit(id=${item.id})}" th:text="${item.code}"></a></td>
+                                            <td><a th:href="@{/delivery/details(id=${item.id})}" th:text="${item.code}"></a></td>
                                             <td th:text="${item.type}"></td>
                                             <td th:text="${item.price}"></td>
                                             <td th:text="${item.fromOffice}"></td>

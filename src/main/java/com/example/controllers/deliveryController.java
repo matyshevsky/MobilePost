@@ -73,5 +73,10 @@ public class deliveryController {
         return "redirect:/delivery/list";
     }
 
+    @RequestMapping(value= "/details", method = RequestMethod.GET)
+    public String details(@ModelAttribute(value="id") Long id, Model model){
+        model.addAttribute("delivery", deliveryService.getDeliveryById(id));
+        return "detailsDelivery";
+    }
 
 }

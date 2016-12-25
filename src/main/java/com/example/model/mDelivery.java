@@ -58,7 +58,7 @@ public class mDelivery extends mBaseObject {
         this.advicePackage = advicePackage;
     }
 
-    public boolean isDelivered() {
+    public boolean isDelivery() {
         return isDelivered;
     }
 
