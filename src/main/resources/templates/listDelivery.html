@@ -156,7 +156,7 @@
                         <div class="col-md-6">
                             <h3 class="title">
                                 Przesyłki
-                                <a href="addDelvier" class="btn btn-primary btn-sm rounded-s">Dodaj</a>
+                                <a href="addDeliver" class="btn btn-primary btn-sm rounded-s">Dodaj</a>
                             </h3>
                             <p class="title-description"> Sekcja kierownicza zarządzania przesyłkami </p>
                         </div>
@@ -191,12 +191,13 @@
                                         <tr th:each="item : ${deliverList}">
                                             <td><a th:href="@{/delivery/details(id=${item.id})}" th:text="${item.code}"></a></td>
                                             <td th:text="${item.type}"></td>
-                                            <td th:text="${item.price}"></td>
+                                            <td th:text="${item.price} + ' PLN'"></td>
                                             <td th:text="${item.fromOffice}"></td>
                                             <td th:text="${item.recipientZipCode}"></td>
                                             <td th:text="${#calendars.format(item.estimatedDate,'yyyy-MM-dd')}"></td>
 
-                                            <td><a th:href="@{/delivery/advise(id=${item.id})}" class="btn btn-warning triggerRemove" >Awizo</a>
+                                            <td><a th:if="${item.advicePackage != true}" th:href="@{/delivery/advise(id=${item.id})}" class="btn btn-warning triggerRemove" >Awizo</a>
+                                                <a th:if="${item.advicePackage == true}" href="#" class="btn btn-warning triggerRemove disabled" >Awizo</a>
                                                 <a th:href="@{/delivery/delivered(id=${item.id})}" class="btn btn-success triggerDelivery">Doręczono</a>
                                             </td>
                                         </tr>

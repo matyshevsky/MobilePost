@@ -74,7 +74,7 @@
                         <li class="active open">
                             <a href=""> <i class="fa fa-folder-o fa-fw"></i> Zarządzaj <i class="fa arrow"></i> </a>
                             <ul class="collapse in">
-                                <li class="active"><a href="/deliver/list">
+                                <li class="active"><a href="/delivery/list">
                                     <i class="fa fa-archive fa-fw"></i>
                                     Paczki
                                 </a></li>
@@ -156,7 +156,7 @@
                         <div class="col-md-6">
                             <h3 class="title">
                                 Przesyłki
-                                <a href="addDelvier" class="btn btn-primary btn-sm rounded-s">Dodaj</a>
+                                <a href="addDeliver" class="btn btn-primary btn-sm rounded-s">Dodaj</a>
                             </h3>
                             <p class="title-description"> Sekcja kierownicza zarządzania przesyłkami </p>
                         </div>
@@ -195,13 +195,13 @@
                                                     <p class="form-control-static boxed" th:text = "${delivery.fromOffice}" ></p>
                                                 </div>
                                                 <div class="form-group"> <label class="control-label">Awizowano</label>
-                                                    <p class="form-control-static boxed" th:text = "${delivery.advicePackage == true} ? 'Tak' : 'Nie'" ></p>
+                                                    <p class="form-control-static boxed" th:text = "${delivery.advicePackage == true} ? 'Tak' : 'Nie'" th:style="${delivery.advicePackage == true} ? 'color: #8CDE33' : 'color: #1e9eca'"></p>
                                                 </div>
                                                 <div class="form-group"> <label class="control-label">Szacowany czas doręczenia</label>
                                                     <p class="form-control-static boxed" th:text = "${#calendars.format(delivery.estimatedDate,'yyyy-MM-dd')}" ></p>
                                                 </div>
                                                 <div class="form-group"> <label class="control-label">Data doręczenia</label>
-                                                    <p class="form-control-static boxed" th:text = "${#calendars.format(delivery.deliveredDate,'yyyy-MM-dd')}" ></p>
+                                                    <p th:if="${delivery.deliveredDate} != null" class="form-control-static boxed" th:text = "${#calendars.format(delivery.deliveredDate,'yyyy-MM-dd')}" ></p>
                                                 </div>
 
                                             </form>

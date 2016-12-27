@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Produkt</label>
-                                    <select th:field="*{type}">
+                                    <select class = "form-control form-control-sm" th:field="*{type}">
                                         <option th:each="type : ${products}"
                                                 th:value="${type.id}"
                                                 th:text="${type.name}"></option>
