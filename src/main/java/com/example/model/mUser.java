@@ -25,14 +25,18 @@ public class mUser extends mBaseObject implements UserDetails {
     @NotNull
     private String password;
 
+    @NotNull
+    private Long postOffice;
+
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<mRole> userRoleEntity = new HashSet<>();
 
-    public mUser(String username, String password, Set<mRole> userRoleEntity) {
+    public mUser(String username, String password, Long postOffice, Set<mRole> userRoleEntity) {
         super();
         this.username = username;
         this.password = password;
         this.userRoleEntity = userRoleEntity;
+        this.postOffice = postOffice;
     }
 
     public Set<mRole> getUserRoleEntity() {
@@ -58,6 +62,14 @@ public class mUser extends mBaseObject implements UserDetails {
 
     public String getPassword() {
         return password;
+    }
+
+    public Long getPostOffice() {
+        return postOffice;
+    }
+
+    public void setPostOffice(Long postOffice) {
+        this.postOffice = postOffice;
     }
 
     public void setPassword(String password) {

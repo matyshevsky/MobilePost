@@ -178,27 +178,30 @@
                                     <table class="table table-striped table-bordered table-hover flip-content">
                                         <thead class="flip-header">
                                         <tr>
-                                            <th>Kod</th>
-                                            <th>Typ</th>
+                                            <th ><a href="/delivery/list/sort?code">Kod</a> </th>
                                             <th>Cena</th>
                                             <th>Urząd nadania</th>
                                             <th>Urząd docelowy</th>
                                             <th>Szacowany czas doręczenia</th>
+                                            <th>Awizo</th>
                                             <th>Opcje</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="item : ${deliverList}">
                                             <td><a th:href="@{/delivery/details(id=${item.id})}" th:text="${item.code}"></a></td>
-                                            <td th:text="${item.type}"></td>
                                             <td th:text="${item.price} + ' PLN'"></td>
                                             <td th:text="${item.fromOffice}"></td>
                                             <td th:text="${item.recipientZipCode}"></td>
-                                            <td th:text="${#calendars.format(item.estimatedDate,'yyyy-MM-dd')}"></td>
+                                            <td th:if="${item.delivered != true}" th:text="${#calendars.format(item.estimatedDate,'yyyy-MM-dd')}"></td>
+                                            <td th:if="${item.delivered == true}" th:text="'Doręczono: '+${#calendars.format(item.deliveredDate,'yyyy-MM-dd')}"></td>
 
-                                            <td><a th:if="${item.advicePackage != true}" th:href="@{/delivery/advise(id=${item.id})}" class="btn btn-warning triggerRemove" >Awizo</a>
-                                                <a th:if="${item.advicePackage == true}" href="#" class="btn btn-warning triggerRemove disabled" >Awizo</a>
-                                                <a th:href="@{/delivery/delivered(id=${item.id})}" class="btn btn-success triggerDelivery">Doręczono</a>
+                                            <td th:text="${item.advicePackage == true} ? 'Tak' : '-' "></td>
+
+                                            <td><a th:if="${item.advicePackage != true AND item.delivered != true}" th:href="@{/delivery/advise(id=${item.id})}" class="btn btn-warning triggerRemove" >Awizo</a>
+                                                <a th:if="${item.advicePackage == true or item.delivered == true}" href="#" class="btn btn-warning triggerRemove disabled" >Awizo</a>
+                                                <a th:if="${item.delivered != true}" th:href="@{/delivery/delivered(id=${item.id})}" class="btn btn-success triggerDelivery">Doręczono</a>
+                                                <a th:if="${item.delivered == true}" href="#" class="btn btn-success triggerDelivery disabled">Doręczono</a>
                                             </td>
                                         </tr>
                                         </tbody>

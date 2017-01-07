@@ -1,5 +1,8 @@
 package com.example.controllers;
 
+import com.example.model.mPost;
+import com.example.model.mUser;
+import com.example.repository.PostDao;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class homeController {
 
+    @Autowired
+    PostDao postdao;
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
@@ -39,7 +44,10 @@ public class homeController {
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model) {
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         return "index";
     }
 

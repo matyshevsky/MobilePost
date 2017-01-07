@@ -6,11 +6,16 @@ import com.example.service.DeliveryService;
 import com.example.service.ProductService;
 import com.example.service.TypesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 
 /**
  * Created by Karol on 24.12.2016.
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value = "/delivery")
 public class deliveryController {
+
 
     @Autowired
     DeliveryService deliveryService;
@@ -31,6 +37,7 @@ public class deliveryController {
         model.addAttribute("deliverList", deliveryService.getAllDelivers());
         return "listDelivery";
     }
+
 
     @RequestMapping(value = "/addDeliver", method = RequestMethod.GET)
     public String addDeliver(Model model){
@@ -51,14 +58,23 @@ public class deliveryController {
     @RequestMapping(value = "/addDeliverTODO", method = RequestMethod.POST)
     public String addDeliver(@ModelAttribute(value="delivery") mDelivery delivery){
         delivery = deliveryService.makeDeliver(delivery);
-        return "confirmDeliver";
+        if(!delivery.getCode().isEmpty())
+            return "confirmDeliver";
+        else
+            return "listDelivery";
     }
 
     @RequestMapping(value = "/addDeliver", method = RequestMethod.POST)
     public String confirmDeliver(@ModelAttribute(value="delivery") mDelivery delivery){
         delivery = deliveryService.makeDeliver(delivery);
-        deliveryService.addDelivery(delivery);
-        return "redirect:/delivery/list";
+        if(!delivery.getCode().isEmpty()){
+            deliveryService.addDelivery(delivery);
+            return "redirect:/delivery/list";
+        }
+        else{
+            return "redirect:/delivery/list";
+        }
+
     }
 
     @RequestMapping(value = "/advise", method = RequestMethod.GET)

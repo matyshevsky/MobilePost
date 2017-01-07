@@ -23,7 +23,7 @@ public class mDelivery extends mBaseObject {
     private double price;
     private Long fromOffice;
     private boolean advicePackage;
-    private boolean isDelivered;
+    private boolean delivered;
     private Date estimatedDate;
     private Date deliveredDate;
 
@@ -50,20 +50,21 @@ public class mDelivery extends mBaseObject {
     @NotNull
     private String recipientPhone;
 
+
+    public boolean isDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+
     public boolean isAdvicePackage() {
         return advicePackage;
     }
 
     public void setAdvicePackage(boolean advicePackage) {
         this.advicePackage = advicePackage;
-    }
-
-    public boolean isDelivery() {
-        return isDelivered;
-    }
-
-    public void setDelivered(boolean delivered) {
-        isDelivered = delivered;
     }
 
     public Date getEstimatedDate() {
