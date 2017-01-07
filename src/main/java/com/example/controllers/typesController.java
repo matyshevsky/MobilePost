@@ -1,8 +1,12 @@
 package com.example.controllers;
 
+import com.example.model.mPost;
 import com.example.model.mTypes;
+import com.example.model.mUser;
+import com.example.repository.PostDao;
 import com.example.service.TypesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,15 +23,23 @@ public class typesController {
 
     @Autowired
     TypesService typesService;
+    @Autowired
+    PostDao postdao;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getAllTypes(Model model){
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("typesList", typesService.getAllTypes());
         return "typesList";
     }
 
     @RequestMapping(value = "/addTypes", method = RequestMethod.GET)
     public String addUser(Model model){
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         mTypes mtype = new mTypes();
         model.addAttribute("mtype", mtype);
         return "addTypes";
@@ -41,6 +53,9 @@ public class typesController {
 
     @RequestMapping("/edit")
     public String edit(@RequestParam(value = "id") Long id, Model model) {
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("mtype", typesService.getPostById(id));
         return "editTypes";
     }

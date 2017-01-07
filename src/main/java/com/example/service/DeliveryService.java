@@ -11,8 +11,9 @@ public interface DeliveryService {
 
     Collection<mDelivery> getAllDelivers();
     mDelivery getDeliveryByCode(String code);
-    mDelivery getDeliveryByFromOffice(Long fromOffice);
-    mDelivery getDeliveryByRecipientZipCode(String recipientZipCode);
+    Collection<mDelivery> getDeliveryByFromOffice(Long fromOffice);
+    Collection<mDelivery> getDeliveryByRecipientZipCode(String recipientZipCode);
+    Collection<mDelivery> getDeliveryByFromOfficeAndRecipientZipCode(Long fromOffice, String recipientZipCode);
     mDelivery getDeliveryById(Long id);
     mDelivery addDelivery(mDelivery delivery);
     void update(mDelivery delivery);

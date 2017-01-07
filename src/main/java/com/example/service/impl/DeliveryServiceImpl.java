@@ -46,13 +46,18 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public mDelivery getDeliveryByFromOffice(Long fromOffice) {
+    public Collection<mDelivery> getDeliveryByFromOffice(Long fromOffice) {
         return deliveryDao.getDeliveryByFromOffice(fromOffice);
     }
 
     @Override
-    public mDelivery getDeliveryByRecipientZipCode(String recipientZipCode) {
+    public Collection<mDelivery> getDeliveryByRecipientZipCode(String recipientZipCode) {
         return deliveryDao.getDeliveryByRecipientZipCode(recipientZipCode);
+    }
+
+    @Override
+    public Collection<mDelivery> getDeliveryByFromOfficeAndRecipientZipCode(Long fromOffice, String recipientZipCode) {
+        return deliveryDao.getDeliveryByFromOfficeAndRecipientZipCode(fromOffice, recipientZipCode);
     }
 
     @Override

@@ -1,12 +1,16 @@
 package com.example.controllers;
 
 import com.example.model.mDelivery;
+import com.example.model.mPost;
 import com.example.model.mTypes;
+import com.example.model.mUser;
+import com.example.repository.PostDao;
 import com.example.service.DeliveryService;
 import com.example.service.ProductService;
 import com.example.service.TypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,9 +35,19 @@ public class deliveryController {
     ProductService productService;
     @Autowired
     TypesService typesService;
+    @Autowired
+    PostDao postdao;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String getAllDelivers(Model model){
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+
+        //Collection<mDelivery> toOffice = deliveryService.getDeliveryByRecipientZipCode(post.getZipcode());
+        //Collection<mDelivery> fromOffice = deliveryService.get
+
+
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("deliverList", deliveryService.getAllDelivers());
         return "listDelivery";
     }
@@ -42,6 +56,9 @@ public class deliveryController {
     @RequestMapping(value = "/addDeliver", method = RequestMethod.GET)
     public String addDeliver(Model model){
         mDelivery mDelivery = new mDelivery();
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("delivery", mDelivery);
         mTypes types = typesService.getTypesByCode("Paczka");
         if(types != null){
@@ -91,6 +108,9 @@ public class deliveryController {
 
     @RequestMapping(value= "/details", method = RequestMethod.GET)
     public String details(@ModelAttribute(value="id") Long id, Model model){
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("delivery", deliveryService.getDeliveryById(id));
         return "detailsDelivery";
     }
