@@ -14,6 +14,6 @@ public interface DeliveryDao extends JpaRepository<mDelivery, Long> {
     Collection<mDelivery> getDeliveryByFromOffice(Long fromOffice);
     Collection<mDelivery> getDeliveryByRecipientZipCode(String recipientZipCode);
     mDelivery getDeliveryById(Long id);
-    Collection<mDelivery> getDeliveryByFromOfficeAndRecipientZipCode(Long fromOffice, String recipientZipCode);
+    Collection<mDelivery> getDeliveryByFromOfficeOrRecipientZipCode(Long fromOffice, String recipientZipCode);
 
 }

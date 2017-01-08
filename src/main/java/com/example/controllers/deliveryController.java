@@ -42,16 +42,11 @@ public class deliveryController {
     public String getAllDelivers(Model model){
         mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mPost post = postdao.getPostById(user.getPostOffice());
-
-        //Collection<mDelivery> toOffice = deliveryService.getDeliveryByRecipientZipCode(post.getZipcode());
-        //Collection<mDelivery> fromOffice = deliveryService.get
-
-
+        Collection<mDelivery> delivers = deliveryService.getDeliveryByFromOfficeOrRecipientZipCode(user.getPostOffice(), post.getZipcode());
         model.addAttribute("location", post.getName() + " " + post.getZipcode());
-        model.addAttribute("deliverList", deliveryService.getAllDelivers());
+        model.addAttribute("deliverList", delivers);
         return "listDelivery";
     }
-
 
     @RequestMapping(value = "/addDeliver", method = RequestMethod.GET)
     public String addDeliver(Model model){
