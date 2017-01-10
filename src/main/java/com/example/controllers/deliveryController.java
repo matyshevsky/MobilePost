@@ -1,9 +1,6 @@
 package com.example.controllers;
 
-import com.example.model.mDelivery;
-import com.example.model.mPost;
-import com.example.model.mTypes;
-import com.example.model.mUser;
+import com.example.model.*;
 import com.example.repository.PostDao;
 import com.example.service.DeliveryService;
 import com.example.service.ProductService;
@@ -13,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,12 +48,16 @@ public class deliveryController {
 
     @RequestMapping(value = "/addDeliver", method = RequestMethod.GET)
     public String addDeliver(Model model){
+        return addObject(model, "Paczka");
+    }
+
+    private String addObject(Model model, String type) {
         mDelivery mDelivery = new mDelivery();
         mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mPost post = postdao.getPostById(user.getPostOffice());
         model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("delivery", mDelivery);
-        mTypes types = typesService.getTypesByCode("Paczka");
+        mTypes types = typesService.getTypesByCode(type);
         if(types != null){
             Long delvierType = types.getId();
             model.addAttribute("products", productService.getProductByType(delvierType));
@@ -63,8 +65,19 @@ public class deliveryController {
         else{
             model.addAttribute("products", productService.getAllProducts());
         }
+        if(type == "Kurier"){
+            model.addAttribute("courier", true);
+        }
+        else{
+            model.addAttribute("courier", false);
+        }
 
         return "addDeliver";
+    }
+
+    @RequestMapping(value = "/addCourier", method = RequestMethod.GET)
+    public String addCourier(Model model){
+        return addObject(model, "Kurier");
     }
 
     @RequestMapping(value = "/addDeliverTODO", method = RequestMethod.POST)
@@ -77,7 +90,14 @@ public class deliveryController {
     }
 
     @RequestMapping(value = "/addDeliver", method = RequestMethod.POST)
-    public String confirmDeliver(@ModelAttribute(value="delivery") mDelivery delivery){
+    public String confirmDeliver(@ModelAttribute(value="delivery") mDelivery delivery, BindingResult result){
+        mProduct product = productService.getProductById(delivery.getType());
+        if(delivery.getWeight() > product.getWeight()){
+
+            result.rejectValue("weight", "Waga paczki jest większa niż dopuszczalna");
+            return "addDeliver";
+        }
+
         delivery = deliveryService.makeDeliver(delivery);
         if(!delivery.getCode().isEmpty()){
             deliveryService.addDelivery(delivery);
@@ -109,5 +129,6 @@ public class deliveryController {
         model.addAttribute("delivery", deliveryService.getDeliveryById(id));
         return "detailsDelivery";
     }
+
 
 }

@@ -108,11 +108,11 @@
                             <a href=""> <i class="fa fa-plus-square-o fa-fw"></i> Zarejestruj <i class="fa arrow"></i>
                             </a>
                             <ul class="collapse in">
-                                <li class="active"><a href="/delivery/addDeliver">
+                                <li th:class="${courier} ? '' : active"><a href="/delivery/addDeliver">
                                     <i class="fa fa-envelope-o fa-fw"></i>
                                     Dodaj nową przesyłkę
                                 </a></li>
-                                <li><a href="/deliver/courier">
+                                <li th:class="${courier} ? active : ''"><a href="/delivery/addCourier">
                                     <i class="fa fa-truck fa-fw"></i>
                                     Dodaj przesyłkę kurierską
                                 </a></li>
@@ -152,14 +152,11 @@
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <article class="content dashboard-page">
             <div class="title-block">
-                <h3 class="title">
-                    Dodaj paczkę
-                </h3>
+                <h3 class="title" th:text="${courier} ? 'Dodaj kuriera' : 'Dodaj paczkę'"></h3>
                 <p class="title-description"> Aby dodać paczkę proszę o uzupełnienie wszystkich pól</p>
             </div>
             <div class="subtitle-block">
-                <h3 class="subtitle">
-                    Formularz dodawania nowej paczki
+                <h3 class="subtitle" th:text="${courier} ? 'Formularz dodawania nowego kuriera' : 'Formularz dodawania nowej paczki'">
                 </h3> </div>
             <section class="section">
                 <div class="row sameheight-container">
@@ -167,7 +164,7 @@
                         <div class="col-md-4">
                             <div class="card card-block sameheight-item">
                                 <div class="title-block">
-                                    <h5>Dane paczki</h5>
+                                    <h5 th:text="${courier} ? 'Dane kuriera' : 'Dane paczki'"></h5>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Numer przesyłki</label>
