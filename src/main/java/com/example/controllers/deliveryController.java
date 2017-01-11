@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,6 +44,18 @@ public class deliveryController {
         Collection<mDelivery> delivers = deliveryService.getDeliveryByFromOfficeOrRecipientZipCode(user.getPostOffice(), post.getZipcode());
         model.addAttribute("location", post.getName() + " " + post.getZipcode());
         model.addAttribute("deliverList", delivers);
+        model.addAttribute("expenditure", false);
+        return "listDelivery";
+    }
+
+    @RequestMapping(value = "/expenditure", method = RequestMethod.GET)
+    public String getExpenditure(Model model){
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        Collection<mDelivery> delivers = deliveryService.getDeliveryByFromOffice(post.getId());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
+        model.addAttribute("deliverList", delivers);
+        model.addAttribute("expenditure", true);
         return "listDelivery";
     }
 
@@ -79,6 +92,28 @@ public class deliveryController {
     public String addCourier(Model model){
         return addObject(model, "Kurier");
     }
+
+    @RequestMapping(value = "/searchDeliver", method = RequestMethod.GET)
+    public String search(Model model){
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
+        return "searchDeliver";
+    }
+
+    @RequestMapping(value = "/searchDeliver", method = RequestMethod.POST)
+    public String search(@RequestParam("searchText") String searchText, Model model){
+        Collection<mDelivery> delivers = deliveryService.getDeliveryByCode(searchText);
+        mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost post = postdao.getPostById(user.getPostOffice());
+        model.addAttribute("location", post.getName() + " " + post.getZipcode());
+        model.addAttribute("deliverList", delivers);
+        model.addAttribute("searchable",true);
+        model.addAttribute("expenditure",false);
+
+        return "listDelivery";
+    }
+
 
     @RequestMapping(value = "/addDeliverTODO", method = RequestMethod.POST)
     public String addDeliver(@ModelAttribute(value="delivery") mDelivery delivery){

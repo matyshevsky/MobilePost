@@ -71,10 +71,10 @@
                             <a href="/"> <i class="fa fa-home fa-fw"></i> Strona główna </a>
                         </li>
 
-                        <li class="active open">
+                        <li th:class="${expenditure} or ${searchable} ? '' : 'active open'">
                             <a href=""> <i class="fa fa-folder-o fa-fw"></i> Zarządzaj <i class="fa arrow"></i> </a>
-                            <ul class="collapse in">
-                                <li class="active"><a href="/deliver/list">
+                            <ul th:class="${expenditure} or ${searchable} ? '' : 'collapse in'">
+                                <li th:class="${expenditure} or ${searchable} ? '' : active"><a href="/delivery/list">
                                     <i class="fa fa-archive fa-fw"></i>
                                     Paczki
                                 </a></li>
@@ -88,16 +88,16 @@
                                 </a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li th:class="${expenditure} or ${searchable} ? 'active open' : ''">
                             <a href=""> <i class="fa fa-sign-out fa-fw"></i> Rozchody <i class="fa arrow"></i> </a>
-                            <ul>
-                                <li><a href="#">
+                            <ul th:class="${expenditure} ? 'collapse in' : ''">
+                                <li th:class="${expenditure} ? active : ''"><a href="/delivery/expenditure">
                                     <i class="fa fa-list fa-fw"></i>
                                     Wszystkie
                                 </a></li>
-                                <li><a href="#">
+                                <li th:class="${searchable} ? active : ''"><a href="#">
                                     <i class="fa fa-search fa-fw"></i>
-                                    Znajdz
+                                    Znajdź
                                 </a></li>
                             </ul>
                         </li>
@@ -158,7 +158,7 @@
                                 Przesyłki
                                 <a href="addDeliver" class="btn btn-primary btn-sm rounded-s">Dodaj</a>
                             </h3>
-                            <p class="title-description"> Sekcja kierownicza zarządzania przesyłkami </p>
+                            <p class="title-description" th:text="${expenditure} ? 'Wszystkie wychodzące przesyłki' : 'Sekcja kierownicza zarządzania przesyłkami'">  </p>
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public mDelivery getDeliveryByCode(String code) {
+    public Collection<mDelivery> getDeliveryByCode(String code) {
         return deliveryDao.getDeliveryByCode(code);
     }
 

@@ -10,7 +10,7 @@ import java.util.Collection;
 public interface DeliveryService {
 
     Collection<mDelivery> getAllDelivers();
-    mDelivery getDeliveryByCode(String code);
+    Collection<mDelivery> getDeliveryByCode(String code);
     Collection<mDelivery> getDeliveryByFromOffice(Long fromOffice);
     Collection<mDelivery> getDeliveryByRecipientZipCode(String recipientZipCode);
     Collection<mDelivery> getDeliveryByFromOfficeOrRecipientZipCode(Long fromOffice, String recipientZipCode);

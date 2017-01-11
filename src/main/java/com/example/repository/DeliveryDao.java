@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 public interface DeliveryDao extends JpaRepository<mDelivery, Long> {
 
-    mDelivery getDeliveryByCode(String code);
+    Collection<mDelivery> getDeliveryByCode(String code);
     Collection<mDelivery> getDeliveryByFromOffice(Long fromOffice);
     Collection<mDelivery> getDeliveryByRecipientZipCode(String recipientZipCode);
     mDelivery getDeliveryById(Long id);
