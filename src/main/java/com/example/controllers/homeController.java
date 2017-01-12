@@ -66,10 +66,10 @@ public class homeController {
 
     private void initialize(){
         Date dt = new Date();
-        mTypes types = typesService.getTypesByCode("Paczka");
-        if(types == null){
+        Collection<mTypes> typess = typesService.getAllTypes();
+        if(typess == null){
 
-            types = new mTypes();
+            mTypes types = new mTypes();
             types.setCode("Paczka");
             types.setName("Paczka pocztowa");
             types.setCreateAt(dt);
@@ -95,6 +95,7 @@ public class homeController {
             post.setCreateAt(dt);
             post.setCode("UPWar");
             post.setZipcode("00-001");
+            postService.addPost(post);
         }
 
         Collection<mUser> users = userService.getAllUser();
@@ -105,6 +106,7 @@ public class homeController {
             user.setPassword("admin");
             user.setPostOffice(post.getId());
             user.setUsername("admin@up.pl");
+            userService.addUser(user);
         }
     }
 

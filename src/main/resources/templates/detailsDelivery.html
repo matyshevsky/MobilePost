@@ -197,6 +197,9 @@
                                                 <div class="form-group"> <label class="control-label">Awizowano</label>
                                                     <p class="form-control-static boxed" th:text = "${delivery.advicePackage == true} ? 'Tak' : 'Nie'" th:style="${delivery.advicePackage == true} ? 'color: #8CDE33' : 'color: #1e9eca'"></p>
                                                 </div>
+                                                <div class="form-group"> <label class="control-label">Doręczono</label>
+                                                    <p class="form-control-static boxed" th:text = "${delivery.delivered == true} ? 'Tak' : 'Nie'" th:style="${delivery.delivered == true} ? 'color: #8CDE33' : 'color: #1e9eca'"></p>
+                                                </div>
                                                 <div class="form-group"> <label class="control-label">Szacowany czas doręczenia</label>
                                                     <p class="form-control-static boxed" th:text = "${#calendars.format(delivery.estimatedDate,'yyyy-MM-dd')}" ></p>
                                                 </div>
@@ -232,7 +235,9 @@
                                                 <div class="form-group"> <label class="control-label">Numer telefonu odbiorcy</label>
                                                     <p class="form-control-static boxed" th:text = "${delivery.recipientPhone}" ></p>
                                                 </div>
-
+                                                <div class="form-group"> <label class="control-label">Data nadania</label>
+                                                    <p class="form-control-static boxed" th:text = "${#calendars.format(delivery.postDate,'yyyy-MM-dd')}" ></p>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>

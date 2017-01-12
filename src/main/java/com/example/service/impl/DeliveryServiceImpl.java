@@ -93,10 +93,13 @@ public class DeliveryServiceImpl implements DeliveryService {
             Calendar c = Calendar.getInstance();
             c.setTime(dt);
             c.add(Calendar.DATE, days);
-            delivery.setEstimatedDate(c.getTime());
 
+            delivery.setEstimatedDate(c.getTime());
             delivery.setAdvicePackage(false);
             delivery.setDelivered(false);
+
+            if(delivery.getPostDate() == null)
+                delivery.setPostDate(dt);
 
             mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             mPost post = postdao.getPostById(user.getPostOffice());

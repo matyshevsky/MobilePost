@@ -184,6 +184,11 @@
                                     <input type="number" class="form-control boxed"
                                            placeholder="Podaj wagę przesyłki (kg)..." th:field="*{weight}"/>
                                 </div>
+                                <div th:if="${courier}" class="form-group">
+                                    <label class="control-label">Data wysyłki</label>
+                                    <input type="date" class="form-control boxed"
+                                           placeholder="Podaj datę wysyłki..." th:field="*{postDate}"/>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">

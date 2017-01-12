@@ -26,6 +26,7 @@ public class mDelivery extends mBaseObject {
     private boolean delivered;
     private Date estimatedDate;
     private Date deliveredDate;
+    private Date postDate;
 
     private String senderName;
     private String senderSurname;
@@ -49,6 +50,14 @@ public class mDelivery extends mBaseObject {
     private String recipientApartment;
     @NotNull
     private String recipientPhone;
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
 
 
     public boolean isDelivered() {
