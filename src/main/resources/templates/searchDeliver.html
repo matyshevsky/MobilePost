@@ -24,11 +24,13 @@
                 </button>
             </div>
             <div class="header-block header-block-search hidden-sm-down">
-                <form role="search">
-                    <div class="input-container"><i class="fa fa-search"></i> <input type="search"
-                                                                                     placeholder="Szukaj"/>
+                <form role="search" th:action="@{/delivery/searchDeliver}" method="post" >
+                    <div class="input-container"><i class="fa fa-search"></i> <input type="text" placeholder="Szukaj" name="searchText"/>
                         <div class="underline"></div>
                     </div>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
                 </form>
             </div>
             <div class="header-block header-block-buttons">
@@ -163,7 +165,7 @@
             </div>
             <section class="section">
                 <div class="row sameheight-container">
-                    <form action="#" th:action="searchDeliver"  method="post">
+                    <form action="#" th:action="searchDeliver" method="post">
                         <div class="col-md-4">
                             <div class="card card-block sameheight-item">
                                 <div class="title-block">
