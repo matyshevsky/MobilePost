@@ -1,13 +1,9 @@
 package com.example.controllers;
 
-import com.example.model.mPost;
-import com.example.model.mTypes;
-import com.example.model.mUser;
+import com.example.model.*;
 import com.example.repository.PostDao;
 import com.example.repository.TypesDao;
-import com.example.service.PostService;
-import com.example.service.TypesService;
-import com.example.service.UserService;
+import com.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,6 +34,10 @@ public class homeController {
     PostService postService;
     @Autowired
     UserService userService;
+    @Autowired
+    DeliveryService deliveryService;
+    @Autowired
+    ProductService productService;
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
@@ -58,9 +58,46 @@ public class homeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
+
         mUser user = (mUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         mPost post = postdao.getPostById(user.getPostOffice());
+        Collection<mDelivery> deliverList = deliveryService.getDeliveryByRecipientZipCode(post.getZipcode());
+        int out = deliveryService.getDeliveryByFromOffice(user.getPostOffice()).size();
+        int in = deliverList.size();
+        int paczka = 0;
+        int list = 0;
+        int kurier = 0;
+        int inne =0;
+        Collection<mDelivery> delivers = deliveryService.getDeliveryByFromOffice(user.getPostOffice());
+        for (mDelivery x: delivers)
+        {
+            mProduct product = productService.getProductById(x.getType());
+            mTypes type = typesService.getPostById(product.getType());
+
+            switch(type.getCode()){
+                case "Paczka":
+                    paczka++;
+                    break;
+                case "List":
+                    list++;
+                    break;
+                case "Kurier":
+                    kurier++;
+                    break;
+                default:
+                    inne++;
+                    break;
+            }
+        }
+
         model.addAttribute("location", post.getName() + " " + post.getZipcode());
+        model.addAttribute("out", out);
+        model.addAttribute("in", in);
+        model.addAttribute("paczka", paczka);
+        model.addAttribute("list", list);
+        model.addAttribute("kurier", kurier);
+        model.addAttribute("inne", inne);
+        model.addAttribute("deliverList", deliverList);
         return "index";
     }
 
@@ -93,14 +130,14 @@ public class homeController {
             mPost post = new mPost();
             post.setName("Urząd pocztowy Warszawa");
             post.setCreateAt(dt);
-            post.setCode("UPWar");
-            post.setZipcode("00-001");
+            post.setCode("UP-Waw");
+            post.setZipcode("01-001");
             postService.addPost(post);
         }
 
         Collection<mUser> users = userService.getAllUser();
         if(users.isEmpty()){
-            mPost post = postService.getPostByCode("UPWar");
+            mPost post = postService.getPostByCode("UP-Waw");
             mUser user = new mUser();
             user.setCreateAt(dt);
             user.setPassword("admin");
